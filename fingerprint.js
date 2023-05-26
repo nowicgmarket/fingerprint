@@ -2441,8 +2441,8 @@ var FingerprintJS = (function (exports) {
       math: getMathFingerprint,
   };
 
-  // var excludeSources = ["fonts", "canvas"];
-  var excludeSources = ExcludeSourcesForReplace ;
+  var excludeSources = ["fonts", "canvas"];
+//   var excludeSources = ExcludeSourcesForReplace ;
 
   /**
    * Loads the built-in entropy sources.
