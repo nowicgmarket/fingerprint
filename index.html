@@ -11,18 +11,46 @@
 </body>
 </html>
 
-<script>
-  // Initialize the agent at application startup.
-  const fpPromise = import('https://openfpcdn.io/fingerprintjs/v3')
-    .then(FingerprintJS => FingerprintJS.load())
+<script type="module">
+  // // Initialize the agent at application startup.
+  // const fpPromise = import('https://openfpcdn.io/fingerprintjs/v3')
+  //   .then(FingerprintJS => FingerprintJS.load())
 
-  // Get the visitor identifier when you need it.
-  fpPromise
-    .then(fp => fp.get())
-    .then(result => {
-      // This is the visitor identifier:
-      const visitorId = result.visitorId
-      console.log(visitorId)
-      document.querySelector('#hash-code').textContent=visitorId;
-    })
+  // // Get the visitor identifier when you need it.
+  // fpPromise
+  //   .then(fp => fp.get())
+  //   .then(result => {
+  //     // This is the visitor identifier:
+  //     const visitorId = result.visitorId
+  //     console.log(visitorId)
+  //     document.querySelector('#hash-code').textContent=visitorId;
+  //   })
+
+  import FingerprintJS from "./fingerprint.js";
+
+  var startT = new Date().getTime();
+  console.log("start generate fph");
+  var fpPromise = FingerprintJS.load()
+      .then(function (fp) {
+          return fp.get();
+      })
+      .then(function (result) {
+          var endT = new Date().getTime();
+          const visitorId = result.visitorId
+          console.log(visitorId)
+          document.querySelector('#hash-code').textContent=visitorId;
+
+          var duration = endT - startT;
+          console.log("fph generated / duration: " + duration);
+
+          var avalue = new Object();
+          avalue.score = result.confidence.score;
+          var fpDuration = new Object();
+          fpDuration.total = duration;
+          for (var key in result.components) {
+              fpDuration[key] = result.components[key]["duration"];
+          }
+          avalue.duration = JSON.stringify(fpDuration);
+          console.log(avalue)
+      });
 </script>
