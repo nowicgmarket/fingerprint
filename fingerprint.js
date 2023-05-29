@@ -2630,3 +2630,18 @@ var FingerprintJS = (function (exports) {
   return exports;
 
 }({}));
+
+(function (window, document, undefined) {
+    // const fpPromise = import('./fingerprint.js')
+    // .then(FingerprintJS => FingerprintJS.load())
+
+  // Get the visitor identifier when you need it.
+  FingerprintJS.load()
+    .then(fp => fp.get())
+    .then(result => {
+      // This is the visitor identifier:
+      const visitorId = result.visitorId
+      console.log(visitorId)
+      document.querySelector('#hash-code').textContent=visitorId;
+    })
+})();
