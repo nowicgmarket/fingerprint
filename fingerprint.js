@@ -2631,7 +2631,7 @@ var FingerprintJS = (function (exports) {
 
 }({}));
 
-(function (window, document, undefined) {
+(function () {
     // const fpPromise = import('./fingerprint.js')
     // .then(FingerprintJS => FingerprintJS.load())
 
