@@ -606,9 +606,6 @@ var FingerprintJS = (function (exports) {
    * This function is out of Semantic Versioning, i.e. can change unexpectedly. Usage is at your own risk.
    */
   function loadSources(sources, sourceOptions, excludeSources) {
-    console.log("loadSources")
-    console.log(excludeSources)
-    excludeSources = ["fonts", "canvas"];
       var includedSources = Object.keys(sources).filter(function (sourceKey) { return excludes(excludeSources, sourceKey); });
       var sourceGetters = Array(includedSources.length);
       // Using `forEachWithBreaks` allows asynchronous sources to complete between synchronous sources
@@ -2486,9 +2483,6 @@ var FingerprintJS = (function (exports) {
    * Returns a function that collects the entropy components to make the visitor identifier.
    */
   function loadBuiltinSources(options, excludeComponents) {
-      console.log("loadBuiltinSources")
-      console.log(excludeSources)
-      excludeSources = ["fonts", "canvas"];
         return loadSources(sources, options, excludeSources);
   }
 
