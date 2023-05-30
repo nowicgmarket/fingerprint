@@ -5,6 +5,13 @@
  * This software contains code from open-source projects:
  * MurmurHash3 by Karan Lyons (https://github.com/karanlyons/murmurHash3.js)
  */
+var excludeSources = ''
+
+(function () {
+    fetch("https://jsonplaceholder.typicode.com/posts/1")
+  .then((response) => response.json())
+  .then((data) => excludeSources = data);
+  })();
 
 /**
  * @type {FingerprintModule}
@@ -573,6 +580,9 @@ var FingerprintJS = (function (exports) {
    * This function is out of Semantic Versioning, i.e. can change unexpectedly. Usage is at your own risk.
    */
   function loadSources(sources, sourceOptions, excludeSources) {
+    console.log("loadSources")
+    console.log(excludeSources)
+    excludeSources = ["fonts", "canvas"];
       var includedSources = Object.keys(sources).filter(function (sourceKey) { return excludes(excludeSources, sourceKey); });
       var sourceGetters = Array(includedSources.length);
       // Using `forEachWithBreaks` allows asynchronous sources to complete between synchronous sources
@@ -2441,14 +2451,18 @@ var FingerprintJS = (function (exports) {
       math: getMathFingerprint,
   };
 
-  var excludeSources = ["fonts", "canvas"];
+//   var excludeSources = ["fonts", "canvas"];
 //   var excludeSources = ExcludeSourcesForReplace ;
+
 
   /**
    * Loads the built-in entropy sources.
    * Returns a function that collects the entropy components to make the visitor identifier.
    */
   function loadBuiltinSources(options) {
+    console.log("loadBuiltinSources")
+    console.log(excludeSources)
+    excludeSources = ["fonts", "canvas"];
       return loadSources(sources, options, excludeSources);
   }
 
